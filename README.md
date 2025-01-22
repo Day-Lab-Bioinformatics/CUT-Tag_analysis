@@ -23,6 +23,6 @@ Identify the genome you need and adapt the Genome_Assembly.sh script to match th
 ## Pre-run quality control
 
 Before starting the data processing, assess if the quality of the data is suitable by using FASTQC. 
-•	Adapt the paths and file extensions in the Launch_FASTQC.sh and FASTQC_Job.sh scripts
-•	Run Launch_FASTQC.sh to parallelize the FASTQC_Job.sh script on all your files to get quality control data from the sequencing results.
+*	Adapt the paths and file extensions in the Launch_FASTQC.sh and FASTQC_Job.sh scripts
+*	Run Launch_FASTQC.sh to parallelize the FASTQC_Job.sh script on all your files to get quality control data from the sequencing results.
 
