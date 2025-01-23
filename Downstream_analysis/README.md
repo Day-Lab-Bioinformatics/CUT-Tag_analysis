@@ -36,9 +36,9 @@ We used the following expression with their code to identify the G4s of interest
 
 Based on the G4Catchall output we look at: 
 * G4s per peak
- * Adapt the path in the count_G4s_per_peak.sh script and run the script.
- * This will result in a .txt file with the amount of G4s in column one and the peak name in column 2.
- * Adapt the path name in the Avg_G4s_per_peak.sh script. Then run it. This will result in one file containing an average G4/peak number for each file you included in the analysis. 
+  * Adapt the path in the count_G4s_per_peak.sh script and run the script.
+  * This will result in a .txt file with the amount of G4s in column one and the peak name in column 2.
+  * Adapt the path name in the Avg_G4s_per_peak.sh script. Then run it. This will result in one file containing an average G4/peak number for each file you included in the analysis. 
 
 * Peaks containing G4s
   * Use the wc -l command on the GPP.txt files resulting from the count_G4s_per_peak.sh script. Every line corresponds to one peak. 
