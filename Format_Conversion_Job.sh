@@ -29,6 +29,6 @@ bamPath="/path/to/project/directory/alignment/bam"
 samtools view -bS -F 4 ${NAME}.sorted.rmDup.sam >$bamPath/${NAME}.mapped.bam
 
 ## Intesect the bam files with the blacklist file. 
-bedtools intersect -v -abam $bamPath/${NAME}.mapped.bam -b $jobpath/ENCFF200UUD.bed >$projPath/blacklistRemoved/${NAME}_hg19.fltd.bam
+bedtools intersect -v -abam $bamPath/${NAME}.mapped.bam -b $jobpath/ENCFF200UUD.bed >$projPath/blacklistRemoved/${NAME}_blr.bam
 
 
