@@ -35,4 +35,8 @@ Remove the duplicates in your files. This is not always recommended for CUT&Tag.
 * Adapt the paths and suffixes as needed in Launch_Duplicate_Removal and Duplicate_Removal_Job.sh.
 * Run the Launch_Duplicate_Removal.sh script which will call the duplicate removal script for each file.  
 
+## File conversion and peak calling
+From here on the scripts differ depending on which method you want to use for peak calling. Our preferred method is MACS2, however if your spike-in proportion is very variable and you woul like to scale to the spike-in, then SEACR is advised. 
+
+# MACS2 file conversion and peak calling
 
