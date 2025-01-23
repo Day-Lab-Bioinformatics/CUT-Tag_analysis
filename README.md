@@ -30,4 +30,9 @@ Before starting the data processing, assess if the quality of the data is suitab
 *	Adapt the paths in Launch_Alignment.sh and Alignment_Job.sh as needed. 
 *	Run Launch_Alignment.sh, this will loop over all the files in the folder containing your sequencing resutls and launch an sbatch background job using Alignment_Job.sh for each file in parallel.
 
+## Remove duplicates
+Remove the duplicates in your files. This is not always recommended for CUT&Tag. If you are looking at chromatin modifications Tn5 will cut in open chromatin and thus will very likely cut at similar places in all cells. In that case it is likely that your duplicates are not due to the library prep PCR, but due to true Tn5 detection. 
+* Adapt the paths and suffixes as needed in Launch_Duplicate_Removal and Duplicate_Removal_Job.sh.
+* Run the Launch_Duplicate_Removal.sh script which will call the duplicate removal script for each file.  
+
 
