@@ -49,5 +49,14 @@ Based on the G4Catchall output we look at:
 * G4 coverage
   * Based on all this data you can calculate the G4 coverage per 100bp. To do this use the following formula: G4s/1000bp=  (total G4s)/(amount of peaks*average peak length)*1000
 
+### Pathway analysis
+To look at the pathways in which your peaks are involved you can follow the insctructions here: https://www.bioconductor.org/packages/devel/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html
 
+## G4 composition analysis
+Based on the G4Catchall predicted G4s you can analyze the loop composition and length of G runs. 
+* This analysis is not without faults: if the first run has 2 Gs and the second run has 3 Gs it is very likely that one of the Gs in the second run is actually in a loop, however, it is not possible to determine which one, therefore the script will not separate a G into a loop and will just report the amount of Gs found in a row.
+* Adapt the paths and file extensions in Launch_looplenth_5.0_G4Catchall.sh and looplength_5.0_G4Catchall_Job.sh. Run Launch_looplenth_5.0_G4Catchall.sh, this will call the two other scripts.
+* This will output 2 txt files per file you run.
+  * The first file with extension _looplength.txt contains all the G4s that have 3 loops, the G4s recognized by quadparser on the opposite strand (meaning containing c’s instead of g’s) will have been inverted, and the table will contain the lengths of each G-run and loop as well as the distribution of the bases in those loops.
+  * The second file with extension _looplength_zerollop.txt contains all the G4s that have less than 3 loops, meaning that there are two runs of G’s separated by 0 bases (or containing only G’s in the loops). Here it is impossible to know where the 0 loop is or if there are G-loops, we therefore preferred to exclude them. However, it might be interesting to look at the proportion of zero loop G4s in the total G4s detected by quadparser. Some perturbations could possibly have a preference for these. If you are interested in this: use wc -l again. 
 
