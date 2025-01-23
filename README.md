@@ -54,6 +54,12 @@ To count the amount of called peaks easily run the following command:
 wc -l *.narrowPeak
 ```
 
+### SEACR file conversion and peak calling
+Convert the files from sam to bam format using samtools. 
+Using the seqDepth calculated during the alignment to the Drosophila genome, the script will find the scaling factor and then use it as input for bamCoverage to change the format from bam to bedgraph. It is advised to verify the seqDepth value and adapt the arbitrary value in the scaling factor calculation base on the range of seqDepth values (we don't want a scaling factor that is too big). 
+*	Adapt the filenames and paths in Launch_Format_Conversion_Scale.sh and Format_Conversion_Job_Scaled.sh.
+*	Run the Launch_Format_Conversion_Scaled.sh script which will call the format conversion script for each file in parallel.
 
+  
 
 
