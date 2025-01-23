@@ -26,3 +26,8 @@ Before starting the data processing, assess if the quality of the data is suitab
 *	Adapt the paths and file extensions in the Launch_FASTQC.sh and FASTQC_Job.sh scripts
 *	Run Launch_FASTQC.sh to parallelize the FASTQC_Job.sh script on all your files to get quality control data from the sequencing results.
 
+## Align to the genomes of interest
+*	Adapt the paths in Launch_Alignment.sh and Alignment_Job.sh as needed. 
+*	Run Launch_Alignment.sh, this will loop over all the files in the folder containing your sequencing resutls and launch an sbatch background job using Alignment_Job.sh for each file in parallel.
+
+
