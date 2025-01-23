@@ -10,6 +10,9 @@
 projPath="/path/to/project/directory"
 fastqPath="/path/to/fastq/files"
 
+## Define the path to your job to be submitted
+jobPath="/path/to/job/script"
+
 cd $fastqPath
 
 ## Loop over all the files in the folder defined in your fastqPath
@@ -31,6 +34,6 @@ do
     mkdir -p ${projPath}/fastqFileQC/${OUTNAME}
 
     ## --export means that you pass on the defined arguments to the script you call here
-    sbatch --export=R1=${READ1},R2=${READ2},NAME=${OUTNAME} /path/to/job/script/FASTQC_Job.sh
+    sbatch --export=R1=${READ1},R2=${READ2},NAME=${OUTNAME} ${jobPath}/FASTQC_Job.sh
 
 done

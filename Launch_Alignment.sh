@@ -10,6 +10,9 @@ module load anaconda3
 conda init
 source activate cut_N_tag
 
+## Define the path to your job to be submitted
+jobPath="/path/to/job/script"
+
 ## Define the path to your sequencing results
 fastqPath="/path/to/fastq/files"
 
@@ -32,7 +35,7 @@ do
     ## echo "$READ1 $READ2"
 
     ## --export means that you pass on the defined arguments to the script you call here
-    sbatch --export=R1=${READ1},R2=${READ2},NAME=${OUTNAME} /path/to/job/script/Alignment_Job.sh
+    sbatch --export=R1=${READ1},R2=${READ2},NAME=${OUTNAME} ${jobPath}/Alignment_Job.sh
 
 done
 
