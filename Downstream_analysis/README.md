@@ -9,3 +9,12 @@ To generate these high quality peaks, you can use the following command:
 bedtools intersect -wa -u -a most_peaks_replicate.narrowPeak -b other_replicate_1.narrowPeak other_replicate_n.narrowPeak >output.narrowPeak
 ```
 
+## General downstream analysis
+### Generating Fasta files
+For a few downstream analyses, you'll need fasta files of your high quality peaks. You can use the Peak_to_fasta.sh script for this. Makes sure to adapt the paths and reference genome file where necessary. 
+
+### Getting the average peak length
+To calculate the average peak length you can use the Avg_peak_length.sh script. This script will loop over all the narrowPeak files in a given directory, calculate the average peak length for each file and output a text document with on each line a file name and the average peak length for that file. 
+
+
+
