@@ -24,3 +24,30 @@ G4s are often clustered in specific genomic regions like enhancers, promotors an
 * Once you have your reference file, you can adapt the paths and file name in Annotation_Job.sh and run it. This will loop over your files and intersect them with your reference file keeping the information from both in a resulting file with extension _annotated.bed.
 * To easily get an overview of how often the different categories occur, adapt the paths in Annotation_calculation.sh and run it. It will create a Mark_distribution.txt file with in the first column the name of your original file, in the second column the mark name and in the third the occurrence of the mark in your file.
 
+### G4Catchall analysis
+The G4Catchall analysis uses code from:
+
+Doluca, O. (2019). *G4Catchall: A G-quadruplex prediction approach considering atypical features*. Journal of Theoretical Biology, 463, 92–98. https://doi.org/10.1016/j.jtbi.2018.12.007
+
+The original code is available at [[G4Catchall Repository]([insert-link-here](https://github.com/odoluca/G4Catchall)].
+
+We greatly appreciate the authors' contributions to the field and for sharing their work.
+We used the following expression with their code to identify the G4s of interest: -–G2L 1..12 --max_imperfect_Gtracts 0 --G4H
+
+Based on the G4Catchall output we look at: 
+* G4s per peak
+ * Adapt the path in the count_G4s_per_peak.sh script and run the script.
+ * This will result in a .txt file with the amount of G4s in column one and the peak name in column 2.
+ * Adapt the path name in the Avg_G4s_per_peak.sh script. Then run it. This will result in one file containing an average G4/peak number for each file you included in the analysis. 
+
+* Peaks containing G4s
+  * Use the wc -l command on the GPP.txt files resulting from the count_G4s_per_peak.sh script. Every line corresponds to one peak. 
+
+* Average G4 length
+  * Adapt the paths in the Avg_G4_length.sh script to get the average length of the detected G4 in G4Catchall.
+
+* G4 coverage
+  * Based on all this data you can calculate the G4 coverage per 100bp. To do this use the following formula: G4s/1000bp=  (total G4s)/(amount of peaks*average peak length)*1000
+
+
+
