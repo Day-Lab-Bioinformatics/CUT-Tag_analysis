@@ -60,6 +60,10 @@ Using the seqDepth calculated during the alignment to the Drosophila genome, the
 *	Adapt the filenames and paths in Launch_Format_Conversion_Scale.sh and Format_Conversion_Job_Scaled.sh.
 *	Run the Launch_Format_Conversion_Scaled.sh script which will call the format conversion script for each file in parallel.
 
+Copy the SEACR_calling.sh script to the directory containing the bedgraph files you want to call peaks from. Then run this script. 
+* NOTE: I did not manage to get SEACR to work while parallelizing the process for all files, however, it only takes a few minutes to run, so parallelization is not necessary. 
+* Adapt the necessary filenames and paths
+
   
 
 
