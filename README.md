@@ -38,5 +38,22 @@ Remove the duplicates in your files. This is not always recommended for CUT&Tag.
 ## File conversion and peak calling
 From here on the scripts differ depending on which method you want to use for peak calling. Our preferred method is MACS2, however if your spike-in proportion is very variable and you woul like to scale to the spike-in, then SEACR is advised. 
 
+You will also remove blacklist regions. These are regions that have annomalous, unstructured or high signal in next generation sequencing. I use ENCFF200UUD.bed as blacklist for the hg19 human genome. You can find blacklist regions on the Boyle lab github page: https://github.com/Boyle-Lab/Blacklist/tree/master/lists they are based on the following article: https://www.nature.com/articles/s41598-019-45839-z#data-availability
+
 ### MACS2 file conversion and peak calling
+Convert the files from sam to bam format using samtools.
+*	Adapt the filenames and paths in Launch_Format_Conversion.sh and Format_Conversion_Job.sh.
+*	Run the Launch_Format_Conversion.sh script which will call the format conversion script for each file in parallel.
+
+*	Adapt the paths and file names in Launch_Peak_Calling.sh and in Peak_Calling_Job.sh to match your data.
+* Based on the organism your samples originated from you need to adapt what comes after -g in the MACS2 peakcalling line: hs = homo sapiens, mm = mus musculus, ce = C. elegans, dm = drosophila melanogaster. 
+*	Run Launch_Peak_Calling.sh which will launch Peak_Calling_Job for each file to call peaks and create bam coverage files.
+  
+To count the amount of called peaks easily run the following command:
+```bash
+wc -l *.narrowPeak
+```
+
+
+
 
