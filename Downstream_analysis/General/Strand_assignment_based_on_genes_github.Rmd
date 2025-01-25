@@ -1,0 +1,89 @@
+---
+title: "Strandedness of promotors"
+output: html_notebook
+author: Adrianna Vandeuren
+date: 10/31/2024
+---
+
+The goal of this script is to assign strandedness to promotors and TssA regions derived from the roadmap epigenomics consortium data based on the genes they control. 
+
+Here is the code for promotors. The rationale behind this code is:
+1) Load all packages and required data
+2) Create a list of start locations of genes based on their strandedness (meaning: genes on + strand start = start; genes on - strand start = end).
+3) Based on the accurate start location list, look for the nearest start location to the promotors and assign the associated strandedness to the promotor
+
+
+```{r}
+## Load required libraries
+library(GenomicRanges)
+library(rtracklayer)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+
+## Set the working directory to where your feature files are
+setwd("~/path/to/feature/of/interest/directory")
+
+## Define the path to your BED file
+promoter_file_path <- "~/path/to/promotor/file.bed"
+
+# Import promoter BED file
+promoters <- import(promoter_file_path)
+
+# Load hg19 gene annotation from TxDb
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+
+# Extract genes
+genes <- genes(txdb)
+
+# Create a GRanges object for adjusted gene starts based on strandedness
+adjusted_gene_starts <- GRanges(seqnames = seqnames(genes),
+                                ranges = IRanges(start = ifelse(strand(genes) == "+", 
+                                                                start(genes), 
+                                                                end(genes)),  # Use start for + strand, end for - strand
+                                                end = ifelse(strand(genes) == "+", 
+                                                             start(genes), 
+                                                             end(genes))),
+                                strand = strand(genes))
+
+# Initialize vector to store nearest gene indices and their strands
+nearest_gene_indices <- vector("integer", length(promoters))
+nearest_strands <- vector("character", length(promoters))
+
+# Find the nearest gene for each promoter based on adjusted start locations
+for (i in seq_len(length(promoters))) {
+  promoter <- promoters[i]
+  
+  # Find the nearest adjusted gene start
+  nearest_gene_indices[i] <- nearest(promoter, adjusted_gene_starts)
+  
+  # Assign the strand of the nearest gene
+  nearest_strands[i] <- as.character(strand(adjusted_gene_starts[nearest_gene_indices[i]]))
+}
+
+# Assign the strand information to the promoters
+promoters_with_strand <- promoters
+strand(promoters_with_strand) <- nearest_strands
+
+# Check if the strand information is set correctly
+# Print first few promoters to confirm
+print(head(promoters_with_strand))
+
+# Export the updated promoters with assigned strand information
+export(promoters_with_strand, "promoters_with_assigned_strand.bed", format = "BED")
+```
+Separate the resulting files based on strand:
+```{r}
+# Load necessary libraries
+library(GenomicRanges)
+library(rtracklayer)
+
+# Assume 'promoters_with_strand' is your GRanges object with strand information already assigned
+
+# Subset promoters on the positive strand
+promoters_plus <- promoters_with_strand[strand(promoters_with_strand) == "+"]
+# Subset promoters on the negative strand
+promoters_minus <- promoters_with_strand[strand(promoters_with_strand) == "-"]
+
+# Export the subsets to separate BED files
+export(promoters_plus, "promoters_with_G4Peaks_plus_strand.bed", format = "BED")
+export(promoters_minus, "promoters_with_G4Peaks_minus_strand.bed", format = "BED")
+```
