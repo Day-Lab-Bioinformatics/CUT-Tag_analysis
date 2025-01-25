@@ -52,6 +52,9 @@ Based on the G4Catchall output we look at:
 ### Pathway analysis
 To look at the pathways in which your peaks are involved you can follow the insctructions here: https://www.bioconductor.org/packages/devel/bioc/vignettes/ChIPseeker/inst/doc/ChIPseeker.html
 
+### Assigning strandedness to genome features based on the nearest gene
+Fot the INDUCE-seq data analysis we wanted to see what feature coould explain the directional pattern of the breaks surrounding G4 peaks. We thought transcription could be a feature of interest. Since many G4s are present in promotors we decided to look at that first. Promotors do not have a strandedness intrinsically, but you can assign one based on the location (+/- strand) of the nearest gene. You can use the Strand_assignment_based_on_genes_github.Rmd script to do so. Adapt the paths and file names where necessary. 
+
 ## G4 composition analysis
 Based on the G4Catchall predicted G4s you can analyze the loop composition and length of G runs. 
 * This analysis is not without faults: if the first run has 2 Gs and the second run has 3 Gs it is very likely that one of the Gs in the second run is actually in a loop, however, it is not possible to determine which one, therefore the script will not separate a G into a loop and will just report the amount of Gs found in a row.
