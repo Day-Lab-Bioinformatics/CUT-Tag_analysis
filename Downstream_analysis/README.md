@@ -63,3 +63,26 @@ Based on the G4Catchall predicted G4s you can analyze the loop composition and l
   * The first file with extension _looplength.txt contains all the G4s that have 3 loops, the G4s recognized by quadparser on the opposite strand (meaning containing c’s instead of g’s) will have been inverted, and the table will contain the lengths of each G-run and loop as well as the distribution of the bases in those loops.
   * The second file with extension _looplength_zerollop.txt contains all the G4s that have less than 3 loops, meaning that there are two runs of G’s separated by 0 bases (or containing only G’s in the loops). Here it is impossible to know where the 0 loop is or if there are G-loops, we therefore preferred to exclude them. However, it might be interesting to look at the proportion of zero loop G4s in the total G4s detected by quadparser. Some perturbations could possibly have a preference for these. If you are interested in this: use wc -l again. 
 
+## DSB Locations Around G4s Visualization Pipeline
+To generate the DSB location frequency plots there are a certain amount of steps involved. To generate these plots we only used "canonical" G4s, meaning G4s with only 4 G-runs. When there are more than 4 G-runs in a row, G4Catchall outputs G4 motifs with more that 4 G-runs since it is not possible to tell which 4 runs will be involved in the formation of the G4 structure. We used the whole genome G4Catchall file here because there weren't enough canonical G4s in our CUT&Tag data. We also extended the DSB locations by 100bp on each side to make it easier to find overlapping DBS/G4s. 
+
+* Run bedtools intersect (DSB file as anchor, G4s as other file).
+  * Adapt the paths and file names in Launch_G4Intersect.sh and then run it, it will call G4Intersect_Job.sh and output the intersects in the defined output directory.
+* Calculate distances between g4s and DSBs
+  * Adapt the paths and file names in Launch_Int2Dist.sh and then run it, it will call Int2Dist_Job.sh and int2dist.py and will output the intersect output with distances in last column.
+* Compile distances and create shuffled versions for enrichment calculation. 
+  * Run dsb_specific_positions_scaled_reps.py, it will output 2 CSV files containing cumulative statistics for DSB locations surrounding G4s (real and shuffled).
+* Plot visual.
+  * This is substantially hard-coded with the use case for DSBs and G4s with certain knockdowns.	File paths, selected gene knockdown, and any stylistic differences (plot title, width, etc.) need to be changed within the script.
+  * Run dsb_overlap_enrichment_visual_reps.R, it will output the visual representations. 
+ 
+
+
+
+
+
+
+
+
+
+
