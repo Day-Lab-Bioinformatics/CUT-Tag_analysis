@@ -8,6 +8,7 @@ To generate these high quality peaks, you can use the following command:
 ```bash
 bedtools intersect -wa -u -a most_peaks_replicate.narrowPeak -b other_replicate_1.narrowPeak other_replicate_n.narrowPeak >output.narrowPeak
 ```
+For a stricter analysis we can isolate only the regions that overlap in the contributing samples and average the signalValue and score of the contributing peaks. We set the minimum overlap to >66% (min 2 out of 3 or 3 out of 4 samples). To do this we use the scripts in the High_Quality directory. Adapt the paths in Launch_consensus_peaks_slurm.sh and consensus_peaks_job.sh. In the consensus_peaks_job.sh script you can also adapt the minimum required samples: --min-samples 3. 
 
 ## General downstream analysis
 ### Generating Fasta files
